@@ -19,24 +19,23 @@ public class CTRPanel : MonoBehaviour
         Debug.LogWarning("AWAKEN");
     }
 
-    void Update()
+    public IEnumerator Update()
     {
-        if (this.id.Length > 0 && this.person != null)
-        {
-            if (this.person.id.ToString() != this.id)
-            {
-                Debug.LogWarning("Finding Person");
-                this.person = Controller.GetComponent<CTRTwitterPortal>().getProfile(this.id);
-            } else
-            {
-                Debug.LogWarning("Setting Person");
-                this.set_name(this.person.screen_name);
-                this.set_screenid(this.person.id.ToString());
-                this.set_description(this.person.description);
-                this.set_followers(this.person.followers_count.ToString());
-            }
-            
+        if (Controller.GetComponent<CTRTwitterPortal>().profileExists(this.id)){
+            person = Controller.GetComponent<CTRTwitterPortal>().getProfile(this.id);
+            Debug.LogWarning("Setting Person");
+            this.set_name(this.person.screen_name);
+            this.set_screenid(this.person.id.ToString());
+            this.set_description(this.person.description);
+            this.set_followers(this.person.followers_count.ToString());
+            //    this.set_avatar(this.person.profile_image_url);
         }
+        else
+        {
+            Debug.LogWarning("Person Didnt Exist");
+        }
+        
+
     }
 
     public void close()
@@ -65,9 +64,10 @@ public class CTRPanel : MonoBehaviour
         this.FollowersCount.GetComponent<Text>().text = count;
     }
 
-    public void set_avatar()
+    public async void set_avatar(string url)
     {
-
+        WWW www = new WWW(url);
+        ProfileIcon.GetComponent<Image>().sprite = Sprite.Create(www.texture, new Rect(0, 0, www.texture.width, www.texture.height), new Vector2(0, 0));
     }
 
 }

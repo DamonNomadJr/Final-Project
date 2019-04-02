@@ -13,11 +13,12 @@ public class CTRTwitterPortal : MonoBehaviour
     private string TwitterAPIConsumerKey = "kaf1MqAm5wRoQ46h0aNsRl8Cf";
     private string TwitterAPIConsumerSecret = "EFIrvL0mHUlEyyd5DuBJsiuozFnnvjquJqJmVSuOxvfD0Z1vRk";
     [Header("Twitter Gnerated Token")]
-    public WebAccessToken TwitterAPIAccessToken;
+    public static WebAccessToken TwitterAPIAccessToken;
     [Header("Twitter Profile")]
     public List<UserProfile> Profile = new List<UserProfile>();
+    public Tweet[] tweets;
 
-    public List<string> id_lists = new List<string>();
+    private List<string> id_lists = new List<string>();
 
     // Start is called before the first frame update
     private void Start()
@@ -32,8 +33,13 @@ public class CTRTwitterPortal : MonoBehaviour
         if(id_lists.Count > 0)
         {
             this.eggProfile(this.id_lists[0]);
+            
             this.id_lists.RemoveRange(0, 1);
         }
+        // foreach (UserProfile person in this.Profile)
+        // {
+        //     this.FindTweets(person.id.ToString());
+        // }
 
     }
 
@@ -48,7 +54,7 @@ public class CTRTwitterPortal : MonoBehaviour
         this.id_lists.Add(id);
     }
 
-    private bool profileExists(string id)
+    public bool profileExists(string id)
     {
         foreach (UserProfile person in this.Profile)
             if (person.id.ToString() == id) return true;
@@ -62,6 +68,9 @@ public class CTRTwitterPortal : MonoBehaviour
         return null;
     }
 
-
+    public async void FindTweets(string id)
+    {
+        tweets = await TwitterRestApiHelper.GetLatestTweetsFromUserByUserId(id, CTRTwitterPortal.TwitterAPIAccessToken.access_token, 1);
+    }
 
 }

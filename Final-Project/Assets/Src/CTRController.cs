@@ -49,6 +49,8 @@ public class CTRController : MonoBehaviour
             person_panel.transform.eulerAngles = new Vector3(0f, person_panel.transform.eulerAngles.y, 0f);
             person_panel.transform.position = new Vector3(person_panel.transform.position.x, 2f, person_panel.transform.position.z);
 
+            //Setting Panel's UserInfo
+            
             //Setting Panel's twitter id to fetch the correct info
             person_panel.GetComponent<CTRPanel>().id = person.TwitterId;
             // person_panel.GetComponent<CTRPanel>().Run();
