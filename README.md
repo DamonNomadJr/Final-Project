@@ -37,4 +37,4 @@ ___
 |- Wrist pop-up panel for more details and info  |
 
 ### YouTube Demo Video
-[![Watch the video]](https://youtu.be/htOMl7lEC7k)]
+[![Watch the video](https://www.youtube.com/upload_thumbnail?v=htOMl7lEC7k&t=hqdefault&ts=1555912454143)](https://youtu.be/htOMl7lEC7k)]
