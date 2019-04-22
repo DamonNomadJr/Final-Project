@@ -35,3 +35,6 @@ ___
 |- Added characters for better distinguishing accounts|                                           |
 |- Created Small animation                       |
 |- Wrist pop-up panel for more details and info  |
+
+### YouTube Demo Video
+[![Watch the video]](https://youtu.be/htOMl7lEC7k)]
